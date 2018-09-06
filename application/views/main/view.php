@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <img style="width: 286px;"
-                             src='/OrderProject/public/materials/<?php echo $data[0]['id']; ?>.jpg'
+                             src='/request/public/materials/<?php echo $data[0]['id']; ?>.jpg'
                              onerror="this.style.display = 'none'">
                     </div>
                 </form>
