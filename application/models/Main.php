@@ -11,12 +11,12 @@ class Main extends Model
     {
         if ($user) {
             if ($user == 'admin')
-                $result = $this->db->row('SELECT o.id,o.name,u.username FROM order_view o LEFT JOIN users u ON o.user_id=u.id');
+                $result = $this->db->row('SELECT o.id,o.name,u.username FROM request_view o LEFT JOIN users u ON o.user_id=u.id');
             else {
                 $paramets = [
                     'user_id' => $_SESSION['id'],
                 ];
-                $result = $this->db->row('select * from order_view where user_id = :user_id', $paramets);
+                $result = $this->db->row('select * from request_view where user_id = :user_id', $paramets);
             }
         } else {
             $result = [];
@@ -32,7 +32,7 @@ class Main extends Model
             'problem' => $post['problem'],
             'user_id' => $_SESSION['id']
         ];
-        $result = $this->db->row('INSERT INTO order_view (id, name, telephone, problem, user_id) VALUES (NULL, :name, :telephone, :problem, :user_id );', $paramets);
+        $result = $this->db->row('INSERT INTO request_view (id, name, telephone, problem, user_id) VALUES (NULL, :name, :telephone, :problem, :user_id );', $paramets);
         $_SESSION['last'] = $this->db->lastInsertId();
         $this->postUploadImage($_FILES['pic']['tmp_name'], $_SESSION['last']);
         return $result;
@@ -43,13 +43,13 @@ class Main extends Model
         $paramets = [
             'id' => $id,
         ];
-        $result = $this->db->row('select * from order_view where id = :id', $paramets);
+        $result = $this->db->row('select * from request_view where id = :id', $paramets);
         return $result;
     }
 
     public function getXML()
     {
-        $result = $this->db->row('SELECT o.name,u.username FROM order_view o LEFT JOIN users u ON o.user_id=u.id');
+        $result = $this->db->row('SELECT o.name,u.username FROM request_view o LEFT JOIN users u ON o.user_id=u.id');
         $xmlstr = <<<XML
 <?xml version='1.0' encoding="utf-8" standalone='yes'?>
         <tag>

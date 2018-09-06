@@ -1,7 +1,7 @@
 <?php
 return [
     'host' => 'localhost',
-    'dbname' => 'order_system',
+    'dbname' => 'requests',
     'user' => 'root',
     'password' => ''
 ];
