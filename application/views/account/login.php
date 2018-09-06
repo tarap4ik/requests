@@ -3,7 +3,7 @@
         <div class="card mx-1 mt-5" style="width: 18rem;">
             <div class="card-header">Вход</div>
             <div class="card-body">
-                <form action="/OrderProject/login" method="post">
+                <form action="/request/login" method="post">
                     <div class="form-group">
                         <p>Логин</p>
                         <input class="form-control" type="text" name="login">

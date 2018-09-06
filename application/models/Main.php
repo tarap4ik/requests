@@ -51,15 +51,16 @@ class Main extends Model
     {
         $result = $this->db->row('SELECT o.name,u.username FROM order_view o LEFT JOIN users u ON o.user_id=u.id');
         $xmlstr = <<<XML
-<?xml version='1.0' encoding="utf-8"?>
-        <title>Список заявок</title>
+<?xml version='1.0' encoding="utf-8" standalone='yes'?>
+        <tag>
+        </tag>
 XML;
         $sxe = new \SimpleXMLElement($xmlstr);
-        $orders = $sxe->addChild('orders');
+        $requests = $sxe->addChild('requests');
         foreach ($result as $key=>$array){
-            $order  = $orders->addChild('order');
+            $request  = $requests->addChild('request');
             foreach ($array as $type=>$value){
-                $order->addChild($type, $value);
+                $request->addChild($type, $value);
             }
         }
         return $sxe->asXML();

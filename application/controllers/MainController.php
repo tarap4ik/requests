@@ -24,11 +24,11 @@ class MainController extends Controller
         if (isset($_SESSION['user'])) {
             if (!empty($_POST)) {
                 $this->model->addOrder($_POST);
-                exit(json_encode(['url' => '/OrderProject/']));
+                exit(json_encode(['url' => '/request/']));
             }
             $this->view->render('Добавить заявку');
         }else{
-            header('location: /OrderProject/');
+            header('location: /request/');
             exit;
         }
 
@@ -46,7 +46,7 @@ class MainController extends Controller
 
             $this->view->render('Просмотр заявки', $vars);
         }else{
-            header('location: /OrderProject/');
+            header('location: /request/');
             exit;
         }
 

@@ -21,7 +21,7 @@ class Router{
 	}
 
 	public function match(){
-		$url = substr($_SERVER['REQUEST_URI'], 13);
+		$url = substr($_SERVER['REQUEST_URI'], 9); //вырезает название корневой папки
 		$url = trim($url, '/');
 		foreach ($this->routes as $route => $params) {
 			if(preg_match($route, $url, $matches)){
@@ -41,7 +41,6 @@ class Router{
 	}
 
 	public function run(){
-
 		if($this->match()){
 		$path='application\controllers\\'.ucfirst($this->params['controller']).'Controller';
 			if(class_exists($path)){

@@ -3,7 +3,7 @@
         <div class="card mx-15 mt-5" style="width: 20rem;">
             <div class="card-header">Добавить заявку</div>
             <div class="card-body">
-                <form action="/OrderProject/add" method="post">
+                <form action="/request/add" method="post">
                     <div class="form-group">
                         <p>Наименование</p>
                         <input class="form-control" type="text" name="name" required>
