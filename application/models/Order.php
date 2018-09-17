@@ -33,7 +33,7 @@ class Order extends Model
             'user_id' => $_SESSION['id']
         ];
 
-        if($_FILES['pic']['name']) {
+        if ($_FILES['pic']['name']) {
             $file = $this->postUploadImage($_FILES['pic']['tmp_name'], $_FILES['pic']['name']);
             if (!$file) {
                 return false;
@@ -60,7 +60,7 @@ class Order extends Model
     public function postUploadImage($path, $name)
     {
         if (exif_imagetype($path)) {
-            if(move_uploaded_file($path, 'public/materials/' . $name)){
+            if (move_uploaded_file($path, 'public/materials/' . $name)) {
                 return true;
             } else {
                 return false;

@@ -14,7 +14,7 @@ class AccountController extends Controller {
                 $_SESSION["user"]=$vars[0]['username'];
                 exit(json_encode(['url'=>'/request/']));
             } else{
-                exit(json_encode(['status'=>'Ошибка!', 'message'=>'Неверное имя пользователя или пароль']));
+                exit(json_encode(['status' => 'Ошибка!', 'message' => 'Неверное имя пользователя или пароль']));
             }
         }
         $this->view->render('Вход');
