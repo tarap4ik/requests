@@ -10,19 +10,19 @@ return [
         'action' => 'logout',
     ],
     '' => [
-        'controller' => 'main',
+        'controller' => 'order',
         'action' => 'index',
     ],
 	'add' => [
-		'controller' => 'main',
+		'controller' => 'order',
 		'action' => 'add',
 	],
     'xml' => [
-        'controller' => 'main',
+        'controller' => 'order',
         'action' => 'xml',
     ],
     'view/{id:\d+}' => [
-        'controller' => 'main',
+        'controller' => 'order',
         'action' => 'view',
     ]
 ];

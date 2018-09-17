@@ -1,59 +1,64 @@
-<?php 
+<?php
 
 namespace application\core;
 
-class Router{
+class Router
+{
 
-	protected $routes= [];
-	protected $params= [];
+    protected $routes = [];
+    protected $params = [];
 
-	public function __construct(){
-		$arr = require 'application/config/routes.php';
-		foreach ($arr as $key => $value) {
-			$this->add($key, $value);
-		}
-	}
+    public function __construct()
+    {
+        $arr = require 'application/config/routes.php';
+        foreach ($arr as $key => $value) {
+            $this->add($key, $value);
+        }
+    }
 
-	public function add($route, $params){
+    public function add($route, $params)
+    {
         $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
-		$route = '#^'.$route.'$#';
-		$this->routes[$route] = $params;
-	}
+        $route = '#^' . $route . '$#';
+        $this->routes[$route] = $params;
+    }
 
-	public function match(){
-		$url = substr($_SERVER['REQUEST_URI'], 9); //вырезает название корневой папки
-		$url = trim($url, '/');
-		foreach ($this->routes as $route => $params) {
-			if(preg_match($route, $url, $matches)){
+    public function match()
+    {
+        $url = substr($_SERVER['REQUEST_URI'], 9); //вырезает название корневой папки
+        $url = trim($url, '/');
+        foreach ($this->routes as $route => $params) {
+            if (preg_match($route, $url, $matches)) {
                 foreach ($matches as $key => $match) {
                     if (is_string($key)) {
                         if (is_numeric($match)) {
-                            $match = (int) $match;
+                            $match = (int)$match;
                         }
                         $params[$key] = $match;
                     }
                 }
-				$this->params = $params;
-				return true;
-			}
-		}
-		return false;
-	}
+                $this->params = $params;
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public function run(){
-		if($this->match()){
-		$path='application\controllers\\'.ucfirst($this->params['controller']).'Controller';
-			if(class_exists($path)){
-				$action = $this->params['action'].'Action';
-				if(method_exists($path, $action)){
-					$controller = new $path($this->params);
-					$controller->$action();
-				} else{
-					echo 'Нет такого метода';
-				}
-			}else{
-				echo 'Не найден '. $path;
-			}
-		}
-	}
+    public function run()
+    {
+        if ($this->match()) {
+            $path = 'application\controllers\\' . ucfirst($this->params['controller']) . 'Controller';
+            if (class_exists($path)) {
+                $action = $this->params['action'] . 'Action';
+                if (method_exists($path, $action)) {
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                } else {
+                    echo 'Нет такого метода';
+                }
+            } else {
+                echo 'Не найден ' . $path;
+            }
+        }
+    }
 }

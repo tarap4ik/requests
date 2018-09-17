@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <p>Изображение</p>
-                        <input type="file" name="pic">
+                        <input type="file" accept="image/*" name="pic">
                     </div>
                     <button type="submit" class="btn btn-dark">Добавить</button>
                 </form>
